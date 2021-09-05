@@ -1,0 +1,43 @@
+service: my-awesome-app
+custom: 
+  pythonRequirements: 
+    dockerizePip: false
+    layer: 
+      compatibleRuntimes: 
+        - python3.7
+      description: "My awesome app layer"
+      name: my-awesome-app-layer
+functions: 
+  app: 
+    environment: 
+      STAGE: "${self:provider.stage}"
+    events: 
+      - 
+        http: 
+          method: any
+          path: "/{proxy+}"
+    handler: main.handler
+    layers: 
+      - 
+        Ref: PythonRequirementsLambdaLayer
+    package: 
+      exclude: 
+        - requirements.txt
+        - package.json
+        - package-lock.json
+        - .serverless/**
+        - .virtualenv/**
+        - node_modules/**
+      include: 
+        - main.py
+package: 
+  individually: true
+plugins: 
+  - serverless-python-requirements
+  - serverless-offline
+provider: 
+  name: aws
+  region: us-east-2
+  runtime: python3.7
+  stage: "${opt:stage, \"dev\"}"
+

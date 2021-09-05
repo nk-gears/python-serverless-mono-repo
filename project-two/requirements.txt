@@ -1,0 +1,13 @@
+asgiref==3.4.1; python_version >= "3.6"
+click==8.0.1; python_version >= "3.6"
+colorama==0.4.4; python_version >= "3.6" and python_full_version < "3.0.0" and platform_system == "Windows" or platform_system == "Windows" and python_version >= "3.6" and python_full_version >= "3.5.0"
+fastapi==0.68.1; python_version >= "3.6"
+h11==0.12.0; python_version >= "3.6"
+importlib-metadata==4.8.1; python_version < "3.8" and python_version >= "3.6"
+lib-one @ file:///Users/Nirmal/Downloads/python-monorepo-master/libs/lib-one; python_full_version >= "3.7.0" and python_full_version < "4.0.0"
+mangum==0.12.2; python_version >= "3.6"
+pydantic==1.8.2; python_full_version >= "3.6.1" and python_version >= "3.6"
+starlette==0.14.2; python_version >= "3.6"
+typing-extensions==3.10.0.2; python_version < "3.8" and python_version >= "3.6" and python_full_version >= "3.6.1"
+uvicorn==0.15.0
+zipp==3.5.0; python_version < "3.8" and python_version >= "3.6"

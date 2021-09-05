@@ -1,0 +1,21 @@
+[tool.poetry]
+name = "project-two"
+version = "0.1.0"
+description = ""
+authors = ["Nirmal"]
+
+[tool.poetry.dependencies]
+python = "^3.7.0"
+
+fastapi = "^0.68.1"
+uvicorn = "^0.15.0"
+mangum = "^0.12.2"
+lib-one = {path = "../libs/lib-one"}
+
+
+[tool.poetry.dev-dependencies]
+pytest = "^5.2"
+
+[build-system]
+requires = ["poetry>=0.12"]
+build-backend = "poetry.masonry.api"
