@@ -1,8 +1,8 @@
 {
   "service": {
-    "service": "service-name-test",
+    "service": "service-name-test1",
     "serviceObject": {
-      "name": "service-name-test"
+      "name": "service-name-test1"
     },
     "provider": {
       "name": "aws",
@@ -86,7 +86,7 @@
           "AppLogGroup": {
             "Type": "AWS::Logs::LogGroup",
             "Properties": {
-              "LogGroupName": "/aws/lambda/service-name-test-dev-app"
+              "LogGroupName": "/aws/lambda/service-name-test1-dev-app"
             }
           },
           "IamRoleLambdaExecution": {
@@ -114,7 +114,7 @@
                     "Fn::Join": [
                       "-",
                       [
-                        "service-name-test",
+                        "service-name-test1",
                         "dev",
                         "lambda"
                       ]
@@ -131,7 +131,7 @@
                         ],
                         "Resource": [
                           {
-                            "Fn::Sub": "arn:${AWS::Partition}:logs:${AWS::Region}:${AWS::AccountId}:log-group:/aws/lambda/service-name-test-dev*:*"
+                            "Fn::Sub": "arn:${AWS::Partition}:logs:${AWS::Region}:${AWS::AccountId}:log-group:/aws/lambda/service-name-test1-dev*:*"
                           }
                         ]
                       },
@@ -142,7 +142,7 @@
                         ],
                         "Resource": [
                           {
-                            "Fn::Sub": "arn:${AWS::Partition}:logs:${AWS::Region}:${AWS::AccountId}:log-group:/aws/lambda/service-name-test-dev*:*:*"
+                            "Fn::Sub": "arn:${AWS::Partition}:logs:${AWS::Region}:${AWS::AccountId}:log-group:/aws/lambda/service-name-test1-dev*:*:*"
                           }
                         ]
                       }
@@ -155,7 +155,7 @@
                 "Fn::Join": [
                   "-",
                   [
-                    "service-name-test",
+                    "service-name-test1",
                     "dev",
                     {
                       "Ref": "AWS::Region"
@@ -173,11 +173,11 @@
                 "S3Bucket": {
                   "Ref": "ServerlessDeploymentBucket"
                 },
-                "S3Key": "serverless/service-name-test/dev/1630859473913-2021-09-05T16:31:13.913Z/app.zip"
+                "S3Key": "serverless/service-name-test1/dev/1630860350249-2021-09-05T16:45:50.249Z/app.zip"
               },
               "Handler": "main.handler",
               "Runtime": "python3.8",
-              "FunctionName": "service-name-test-dev-app",
+              "FunctionName": "service-name-test1-dev-app",
               "MemorySize": 1024,
               "Timeout": 6,
               "Environment": {
@@ -196,20 +196,20 @@
               "AppLogGroup"
             ]
           },
-          "AppLambdaVersionuSWeNoiACv8Vc8JlWN0kkNRg7VEmxcKrsOgE62TiN5s": {
+          "AppLambdaVersionlXuc4Fz0veXcdGXV1t7R7KAv9E23UpF4iO9K4v2tc4": {
             "Type": "AWS::Lambda::Version",
             "DeletionPolicy": "Retain",
             "Properties": {
               "FunctionName": {
                 "Ref": "AppLambdaFunction"
               },
-              "CodeSha256": "573k1koqMtD1JTXqMzq4s7wqLuELmDNh3j99CduQS1I="
+              "CodeSha256": "EqpXagcwViegzFtRT3/cuHBhgYfsN8I12WZWbdv/dL4="
             }
           },
           "ApiGatewayRestApi": {
             "Type": "AWS::ApiGateway::RestApi",
             "Properties": {
-              "Name": "dev-service-name-test",
+              "Name": "dev-service-name-test1",
               "EndpointConfiguration": {
                 "Types": [
                   "EDGE"
@@ -279,7 +279,7 @@
               "AppLambdaPermissionApiGateway"
             ]
           },
-          "ApiGatewayDeployment1630859471926": {
+          "ApiGatewayDeployment1630860343371": {
             "Type": "AWS::ApiGateway::Deployment",
             "Properties": {
               "RestApiId": {
@@ -335,16 +335,16 @@
               "Ref": "ServerlessDeploymentBucket"
             },
             "Export": {
-              "Name": "sls-service-name-test-dev-ServerlessDeploymentBucketName"
+              "Name": "sls-service-name-test1-dev-ServerlessDeploymentBucketName"
             }
           },
           "AppLambdaFunctionQualifiedArn": {
             "Description": "Current Lambda function version",
             "Value": {
-              "Ref": "AppLambdaVersionuSWeNoiACv8Vc8JlWN0kkNRg7VEmxcKrsOgE62TiN5s"
+              "Ref": "AppLambdaVersionlXuc4Fz0veXcdGXV1t7R7KAv9E23UpF4iO9K4v2tc4"
             },
             "Export": {
-              "Name": "sls-service-name-test-dev-AppLambdaFunctionQualifiedArn"
+              "Name": "sls-service-name-test1-dev-AppLambdaFunctionQualifiedArn"
             }
           },
           "ServiceEndpoint": {
@@ -370,7 +370,7 @@
               ]
             },
             "Export": {
-              "Name": "sls-service-name-test-dev-ServiceEndpoint"
+              "Name": "sls-service-name-test1-dev-ServiceEndpoint"
             }
           }
         }
@@ -460,6 +460,9 @@
       "vpc": {}
     },
     "custom": {
+      "pythonRequirements": {
+        "dockerizePip": false
+      },
       "packageExternal": {
         "external": [
           "../libs/lib_one/lib_one"
@@ -467,7 +470,8 @@
       }
     },
     "plugins": [
-      "serverless-package-external"
+      "serverless-package-external",
+      "serverless-python-requirements"
     ],
     "pluginsData": {},
     "functions": {
@@ -487,8 +491,8 @@
         "handler": "main.handler",
         "package": {
           "exclude": [
-            "requirements.txt",
             "package.json",
+            "pyproject.toml",
             "package-lock.json",
             ".serverless/**",
             ".virtualenv/**",
@@ -501,12 +505,13 @@
           ],
           "artifact": "/Users/Nirmal/Downloads/python-monorepo-master/project-two/.serverless/app.zip"
         },
-        "name": "service-name-test-dev-app",
+        "name": "service-name-test1-dev-app",
+        "module": ".",
         "memory": 1024,
         "timeout": 6,
         "runtime": "python3.8",
         "vpc": {},
-        "versionLogicalId": "AppLambdaVersionuSWeNoiACv8Vc8JlWN0kkNRg7VEmxcKrsOgE62TiN5s"
+        "versionLogicalId": "AppLambdaVersionlXuc4Fz0veXcdGXV1t7R7KAv9E23UpF4iO9K4v2tc4"
       }
     },
     "configValidationMode": "warn",
@@ -526,7 +531,7 @@
       },
       "package": {
         "individually": true,
-        "artifactDirectoryName": "serverless/service-name-test/dev/1630859473913-2021-09-05T16:31:13.913Z"
+        "artifactDirectoryName": "serverless/service-name-test1/dev/1630860350249-2021-09-05T16:45:50.249Z"
       },
       "custom": {
         "$ref": "$[\"service\"][\"custom\"]"
@@ -537,7 +542,7 @@
   },
   "package": {
     "individually": true,
-    "artifactDirectoryName": "serverless/service-name-test/dev/1630859473913-2021-09-05T16:31:13.913Z",
+    "artifactDirectoryName": "serverless/service-name-test1/dev/1630860350249-2021-09-05T16:45:50.249Z",
     "artifact": ""
   }
 }

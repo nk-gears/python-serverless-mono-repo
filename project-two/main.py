@@ -1,5 +1,5 @@
 import os
-import uvicorn
+#import uvicorn
 from fastapi import FastAPI
 from mangum import Mangum
 from lib_one import main

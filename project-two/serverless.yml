@@ -1,12 +1,14 @@
-service: service-name-test
+service: service-name-test1
 provider: 
   name: aws
   region: us-east-2
   runtime: python3.8
   stage: "${opt:stage, \"dev\"}"
 
+
 plugins:
   - serverless-package-external
+  - serverless-python-requirements
 
 functions: 
   app: 
@@ -20,8 +22,8 @@ functions:
     handler: main.handler
     package: 
       exclude: 
-        - requirements.txt
         - package.json
+        - pyproject.toml
         - package-lock.json
         - .serverless/**
         - .virtualenv/**
@@ -34,6 +36,8 @@ package:
   individually: true
 
 custom:
+  pythonRequirements:
+    dockerizePip: false
   packageExternal:
     external:
       - '../libs/lib_one/lib_one'      
