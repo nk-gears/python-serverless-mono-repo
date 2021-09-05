@@ -101,14 +101,14 @@ testing = ["pytest (>=4.6)", "pytest-checkdocs (>=2.4)", "pytest-flake8", "pytes
 name = "lib-one"
 version = "0.1.2"
 description = ""
-category = "main"
+category = "dev"
 optional = false
 python-versions = "^3.7.0"
-develop = false
+develop = true
 
 [package.source]
 type = "directory"
-url = "../libs/lib-one"
+url = "../libs/lib_one"
 
 [[package]]
 name = "mangum"
@@ -267,7 +267,7 @@ testing = ["pytest (>=4.6)", "pytest-checkdocs (>=2.4)", "pytest-flake8", "pytes
 [metadata]
 lock-version = "1.1"
 python-versions = "^3.7.0"
-content-hash = "a71f02ea0f479227822d395fa0717a0de362b5fb62b69a4575e03b0b689e6691"
+content-hash = "7ccc78fda90c5c579f9084aa2023cd77784eade3203a26e356e39855f74c5122"
 
 [metadata.files]
 asgiref = [

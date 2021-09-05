@@ -1,12 +1,13 @@
-service: my-awesome-app
-custom: 
-  pythonRequirements: 
-    dockerizePip: false
-    layer: 
-      compatibleRuntimes: 
-        - python3.7
-      description: "My awesome app layer"
-      name: my-awesome-app-layer
+service: service-name-test
+provider: 
+  name: aws
+  region: us-east-2
+  runtime: python3.8
+  stage: "${opt:stage, \"dev\"}"
+
+plugins:
+  - serverless-package-external
+
 functions: 
   app: 
     environment: 
@@ -17,9 +18,6 @@ functions:
           method: any
           path: "/{proxy+}"
     handler: main.handler
-    layers: 
-      - 
-        Ref: PythonRequirementsLambdaLayer
     package: 
       exclude: 
         - requirements.txt
@@ -27,17 +25,15 @@ functions:
         - package-lock.json
         - .serverless/**
         - .virtualenv/**
+        - .venv/**
         - node_modules/**
+        - __pycache__/**
       include: 
         - main.py
 package: 
   individually: true
-plugins: 
-  - serverless-python-requirements
-  - serverless-offline
-provider: 
-  name: aws
-  region: us-east-2
-  runtime: python3.7
-  stage: "${opt:stage, \"dev\"}"
 
+custom:
+  packageExternal:
+    external:
+      - '../libs/lib_one/lib_one'      

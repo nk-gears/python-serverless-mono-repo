@@ -16,6 +16,20 @@ poetry env list  # shows the name of the current environment
 poetry env remove <current environment>
 poetry install  # will create a new environment using your updated configuration
 
+https://dev.to/imsazzad/how-to-publish-and-use-your-python-package-in-and-from-private-bitbucket-or-github-3p4c
+
+
+
+HANDLER_PATH_PREFIX=src/test_lambda/ ./node_modules/serverless/bin/serverless.js invoke local -f LambdaTest -p ./tests/resources/base_event.yml
+
+
+functions:
+  LambdaTest:
+    handler: ${env:HANDLER_PATH_PREFIX, ""}handler.handler
+    module: src/test_lambda
+    package:
+      include:
+        - src/test_lambda/**
 
 
 # python mono repo sample 
